@@ -4,10 +4,10 @@ NREL Wind Turbine Modeling Workshop Simulation
 False         Echo            - Echo input data to <RootName>.ech (flag)
 "FATAL"       AbortLevel      - Error level when simulation should abort (string) {"WARNING", "SEVERE", "FATAL"}
          60   TMax            - Total run time (s)
-    0.00625   DT              - Recommended module time step (s)
-          2   InterpOrder     - Interpolation order for input/output time history (-) {1=linear, 2=quadratic}
+    0.0125   DT              - Recommended module time step (s)
+          1   InterpOrder     - Interpolation order for input/output time history (-) {1=linear, 2=quadratic}
           0   NumCrctn        - Number of correction iterations (-) {0=explicit calculation, i.e., no corrections}
-      99999   DT_UJac         - Time between calls to get Jacobians (s)
+        1.5   DT_UJac         - Time between calls to get Jacobians (s)
       1E+06   UJacSclFact     - Scaling factor used in Jacobians (-)
 ---------------------- FEATURE SWITCHES AND FLAGS ------------------------------
           1   CompElast       - Compute structural dynamics (switch) {1=ElastoDyn; 2=ElastoDyn + BeamDyn for blades}
@@ -22,12 +22,12 @@ False         Echo            - Echo input data to <RootName>.ech (flag)
 ---------------------- ENVIRONMENTAL CONDITIONS --------------------------------
     9.80665   Gravity         - Gravitational acceleration (m/s^2)
       1.225   AirDens         - Air density (kg/m^3)
-          0   WtrDens         - Water density (kg/m^3)
+       1025   WtrDens         - Water density (kg/m^3)
   1.464E-05   KinVisc         - Kinematic viscosity of working fluid (m^2/s)
         335   SpdSound        - Speed of sound in working fluid (m/s)
      103500   Patm            - Atmospheric pressure (Pa) [used only for an MHK turbine cavitation check]
        1700   Pvap            - Vapour pressure of working fluid (Pa) [used only for an MHK turbine cavitation check]
-          0   WtrDpth         - Water depth (m)
+        320   WtrDpth         - Water depth (m)
           0   MSL2SWL         - Offset between still-water level and mean sea level (m) [positive upward]
 ---------------------- INPUT FILES ---------------------------------------------
 "ElastoDyn.dat" EDFile        - Name of file containing ElastoDyn input parameters (quoted string)
@@ -43,13 +43,13 @@ False         Echo            - Echo input data to <RootName>.ech (flag)
 "unused"      IceFile       - Name of file containing ice input parameters (quoted string)
 ---------------------- OUTPUT --------------------------------------------------
 False         SumPrint        - Print summary data to "<RootName>.sum" (flag)
-          5   SttsTime        - Amount of time between screen status messages (s)
+          1   SttsTime        - Amount of time between screen status messages (s)
       99999   ChkptTime       - Amount of time between creating checkpoint files for potential restart (s)
-"default"     DT_Out          - Time step for tabular output (s) (or "default")
+     0.0125   DT_Out          - Time step for tabular output (s) (or "default")
           0   TStart          - Time to begin tabular output (s)
           0   OutFileFmt      - Format for tabular (time-marching) output file (switch) {0: uncompressed binary [<RootName>.outb], 1: text file [<RootName>.out], 2: binary file [<RootName>.outb], 3: both 1 and 2}
 True          TabDelim        - Use tab delimiters in text tabular output file? (flag) {uses spaces if false}
-"ES10.3E2"    OutFmt          - Format used for text tabular output, excluding the time channel.  Resulting field should be 10 characters. (quoted string)
+"ES15.7E2"    OutFmt          - Format used for text tabular output, excluding the time channel.  Resulting field should be 10 characters. (quoted string)
 ---------------------- LINEARIZATION -------------------------------------------
 False         Linearize       - Linearization analysis (flag)
 False         CalcSteady      - Calculate a steady-state periodic operating point before linearization? [unused if Linearize=False] (flag)
@@ -67,5 +67,5 @@ False         LinOutMod       - Write module-level linearization output files in
 ---------------------- VISUALIZATION ------------------------------------------
           0   WrVTK           - VTK visualization data output: (switch) {0=none; 1=initialization data only; 2=animation; 3=mode shapes}
           1   VTK_type        - Type of VTK visualization data: (switch) {1=surfaces; 2=basic meshes (lines/points); 3=all meshes (debug)} [unused if WrVTK=0]
-true          VTK_fields      - Write mesh fields to VTK data files? (flag) {true/false} [unused if WrVTK=0]
+false         VTK_fields      - Write mesh fields to VTK data files? (flag) {true/false} [unused if WrVTK=0]
          15   VTK_fps         - Frame rate for VTK output (frames per second){will use closest integer multiple of DT} [used only if WrVTK=2 or WrVTK=3]
